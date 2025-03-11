@@ -15,28 +15,28 @@ function UserDetail() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error('Ошибка при загрузке пользователя:', error);
+        console.error('Error fetching user:', error);
         setLoading(false);
       });
   }, [id]);
 
   if (loading) {
-    return <p>Загрузка информации о пользователе...</p>;
+    return <p>Loading user information...</p>;
   }
 
   if (!user) {
-    return <p>Пользователь не найден</p>;
+    return <p>User not found</p>;
   }
 
   return (
-    <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg">
       <h1 className="text-2xl font-bold mb-4">
         {user.name.firstname} {user.name.lastname}
       </h1>
       <p className="mb-2"><strong>Email:</strong> {user.email}</p>
-      <p className="mb-2"><strong>Телефон:</strong> {user.phone}</p>
+      <p className="mb-2"><strong>Phone:</strong> {user.phone}</p>
       <div className="mb-2">
-        <strong>Адрес:</strong>
+        <strong>Address:</strong>
         <p>
           {user.address.street}, {user.address.number}
         </p>
@@ -45,29 +45,29 @@ function UserDetail() {
         </p>
       </div>
       <div className="mb-2">
-        <strong>Геолокация:</strong>
+        <strong>Geolocation:</strong>
         <p>
-          Широта: {user.address.geolocation.lat}, Долгота: {user.address.geolocation.long}
+          Latitude: {user.address.geolocation.lat}, Longitude: {user.address.geolocation.long}
         </p>
       </div>
       <div className="mb-2">
         <strong>Username:</strong> {user.username}
       </div>
       <div className="mb-4">
-        <strong>Пароль:</strong>{" "}
+        <strong>Password:</strong>{" "}
         {showPassword ? user.password : "••••••••"}
         <button
           onClick={() => setShowPassword(!showPassword)}
           className="ml-2 text-blue-600 hover:underline"
         >
-          {showPassword ? "Скрыть" : "Показать"}
+          {showPassword ? "Hide" : "Show"}
         </button>
       </div>
       <Link
         to="/users"
-        className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        className="inline-block bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800"
       >
-        Назад к списку пользователей
+        Back to user list
       </Link>
     </div>
   );
